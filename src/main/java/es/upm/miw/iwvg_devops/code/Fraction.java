@@ -59,6 +59,43 @@ public class Fraction {
         return (double) numerator / denominator;
     }
 
+    public boolean isProper(int numerator, int denominator) {
+        if (numerator < denominator)
+            return true;
+        return false;
+    }
+
+    public boolean isImproper(int numerator, int denominator) {
+        if (numerator > denominator)
+            return true;
+        return false;
+    }
+
+    public boolean isEquivalent(int numerator, int denominator) {
+        if (numerator > denominator)
+            return true;
+        return false;
+    }
+
+    public Fraction add(Fraction a, Fraction b) {
+        Fraction c = new Fraction();
+        c.numerator = a.numerator * b.denominator + b.numerator * a.denominator;
+        c.denominator = a.denominator * b.denominator;
+        return c;
+    }
+
+    public Fraction multiply(Fraction a, Fraction b) {
+        return new Fraction(a.numerator * b.numerator, a.denominator * b.denominator);
+    }
+
+    public Fraction divide(Fraction a, Fraction b) {
+        return multiply(a, reverse(b));
+    }
+
+    private Fraction reverse(Fraction a) {
+        return new Fraction(a.denominator, a.numerator);
+    }
+
     @Override
     public String toString() {
         return "Fraction{" +
