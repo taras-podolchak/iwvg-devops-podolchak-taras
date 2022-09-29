@@ -59,42 +59,65 @@ public class Fraction {
         return (double) numerator / denominator;
     }
 
-    public boolean isProper(int numerator, int denominator) {
-        if (numerator < denominator)
-            return true;
-        return false;
+    public boolean isProper(Fraction fraction) {
+        return fraction.getNumerator() < fraction.getDenominator();
     }
 
-    public boolean isImproper(int numerator, int denominator) {
-        if (numerator > denominator)
-            return true;
-        return false;
+    public boolean isImproper(Fraction fraction) {
+        return fraction.getNumerator() > fraction.getDenominator();
     }
 
-    public boolean isEquivalent(int numerator, int denominator) {
-        if (numerator > denominator)
-            return true;
-        return false;
+    public boolean isEquivalent(Fraction that) {
+        return this.reduce().equals(that.reduce());
     }
 
-    public Fraction add(Fraction a, Fraction b) {
-        Fraction c = new Fraction();
-        c.numerator = a.numerator * b.denominator + b.numerator * a.denominator;
-        c.denominator = a.denominator * b.denominator;
-        return c;
+    public Fraction add(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = ((a * d) + (b * c));
+        int den = (b * d);
+
+        return new Fraction(num, den).reduce();
     }
 
-    public Fraction multiply(Fraction a, Fraction b) {
-        return new Fraction(a.numerator * b.numerator, a.denominator * b.denominator);
+    public Fraction multiply(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = a * c;
+        int den = b * d;
+
+        return new Fraction(num, den).reduce();
     }
 
-    public Fraction divide(Fraction a, Fraction b) {
-        return multiply(a, reverse(b));
+    public Fraction divide(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = a * d;
+        int den = b * c;
+
+        return new Fraction(num, den).reduce();
     }
 
-    private Fraction reverse(Fraction a) {
-        return new Fraction(a.denominator, a.numerator);
+    private Fraction reduce() {
+        int u = numerator;
+        int v = denominator;
+        int temp;
+
+        u = Math.abs(u);
+        while (v != 0) {
+            temp = u % v;
+            u = v;
+            v = temp;
+        }
+        return new Fraction(numerator / u, denominator / u);
     }
+
 
     @Override
     public String toString() {
@@ -102,5 +125,18 @@ public class Fraction {
                 "numerator=" + numerator +
                 ", denominator=" + denominator +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Fraction)) {
+            return false;
+        }
+        Fraction that = (Fraction) obj;
+        return (this.numerator == that.getNumerator()
+                && this.denominator == that.getDenominator());
     }
 }
