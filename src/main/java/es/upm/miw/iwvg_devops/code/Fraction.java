@@ -59,11 +59,84 @@ public class Fraction {
         return (double) numerator / denominator;
     }
 
+    public boolean isProper(Fraction fraction) {
+        return fraction.getNumerator() < fraction.getDenominator();
+    }
+
+    public boolean isImproper(Fraction fraction) {
+        return fraction.getNumerator() > fraction.getDenominator();
+    }
+
+    public boolean isEquivalent(Fraction that) {
+        return this.reduce().equals(that.reduce());
+    }
+
+    public Fraction add(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = ((a * d) + (b * c));
+        int den = (b * d);
+
+        return new Fraction(num, den).reduce();
+    }
+
+    public Fraction multiply(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = a * c;
+        int den = b * d;
+
+        return new Fraction(num, den).reduce();
+    }
+
+    public Fraction divide(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = a * d;
+        int den = b * c;
+
+        return new Fraction(num, den).reduce();
+    }
+
+    private Fraction reduce() {
+        int u = numerator;
+        int v = denominator;
+        int temp;
+
+        u = Math.abs(u);
+        while (v != 0) {
+            temp = u % v;
+            u = v;
+            v = temp;
+        }
+        return new Fraction(numerator / u, denominator / u);
+    }
+
+
     @Override
     public String toString() {
         return "Fraction{" +
                 "numerator=" + numerator +
                 ", denominator=" + denominator +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Fraction)) {
+            return false;
+        }
+        Fraction that = (Fraction) obj;
+        return (this.numerator == that.getNumerator()
+                && this.denominator == that.getDenominator());
     }
 }
