@@ -32,9 +32,15 @@ class SearchesTest {
     void testFindFractionMultiplicationByUserFamilyName() {
         assertEquals(new Fraction(-4, 15), new Searches().findFractionMultiplicationByUserFamilyName("Blanco"));
     }
+
     @Test
     void testFindUserFamilyNameByAllNegativeSignFractionDistinct() {
-        assertEquals(List.of("Blanco","López"), new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().collect(Collectors.toList()));
+        assertEquals(List.of("Blanco", "López"), new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().collect(Collectors.toList()));
+    }
+
+    @Test
+    void testFindDecimalFractionByNegativeSignFraction() {
+        assertEquals(List.of(-0.2, -0.5, -0.0), new Searches().findDecimalFractionByNegativeSignFraction().collect(Collectors.toList()));
     }
 
     void testFindUserIdByAnyProperFraction() {

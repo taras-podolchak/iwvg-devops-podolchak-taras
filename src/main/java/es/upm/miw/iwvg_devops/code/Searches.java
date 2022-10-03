@@ -51,6 +51,17 @@ public class Searches {
                 .distinct();
     }
 
+    public Stream<Double> findDecimalFractionByNegativeSignFraction() {
+        return new UsersDatabase().findAll()
+                .flatMap(user -> user.getFractions().stream()
+                        .filter(fraction -> 0 > fraction.getDenominator() || 0 > fraction.getNumerator()))
+                .map(Fraction::decimal);
+    }
+
+    public Stream<Double> findDecimalImproperFractionByUserName(String name) {
+        return Stream.empty();
+    }
+
     public Stream<String> findUserFamilyNameInitialByAnyProperFraction() {
         return Stream.empty();
     }
@@ -68,10 +79,6 @@ public class Searches {
     }
 
     public Stream<String> findUserIdByAllProperFraction() {
-        return Stream.empty();
-    }
-
-    public Stream<Double> findDecimalImproperFractionByUserName(String name) {
         return Stream.empty();
     }
 
@@ -95,14 +102,6 @@ public class Searches {
         return Stream.empty();
     }
 
-
-    public Stream<Double> findDecimalFractionByNegativeSignFraction() {
-
-
-
-        return Stream.empty();
-    }
-
     public Fraction findFractionAdditionByUserId(String id) {
         return null;
     }
@@ -113,8 +112,6 @@ public class Searches {
 
 
     public Fraction findFractionSubtractionByUserName(String name) {
-
-
 
 
         return null;
