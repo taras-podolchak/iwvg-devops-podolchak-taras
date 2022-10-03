@@ -1,5 +1,7 @@
 package es.upm.miw.iwvg_devops.code;
 
+import java.util.Objects;
+
 /**
  * Conceptos: Las fracciones propias son aquellas cuyo numerador es menor que el denominador
  * <p>
@@ -60,11 +62,11 @@ public class Fraction {
     }
 
     public boolean isProper(Fraction fraction) {
-        return fraction.getNumerator() < fraction.getDenominator();
+        return fraction.numerator < fraction.denominator;
     }
 
     public boolean isImproper(Fraction fraction) {
-        return fraction.getNumerator() > fraction.getDenominator();
+        return fraction.numerator > fraction.denominator;
     }
 
     public boolean isEquivalent(Fraction that) {
@@ -104,7 +106,7 @@ public class Fraction {
         return new Fraction(num, den).reduce();
     }
 
-    private Fraction reduce() {
+    public Fraction reduce() {
         int u = numerator;
         int v = denominator;
         int temp;
@@ -138,5 +140,10 @@ public class Fraction {
         Fraction that = (Fraction) obj;
         return (this.numerator == that.getNumerator()
                 && this.denominator == that.getDenominator());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerator, denominator);
     }
 }
