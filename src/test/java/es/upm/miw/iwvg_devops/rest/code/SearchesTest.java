@@ -28,15 +28,19 @@ class SearchesTest {
         assertEquals(List.of("López", "Torres"), new Searches().findUserFamilyNameByFractionDenominator(2).collect(Collectors.toList()));
     }
 
+    @Test
+    void testFindFractionMultiplicationByUserFamilyName() {
+        assertEquals(new Fraction(-4, 15), new Searches().findFractionMultiplicationByUserFamilyName("Blanco"));
+    }
+    @Test
+    void testFindUserFamilyNameByAllNegativeSignFractionDistinct() {
+        assertEquals(List.of("Blanco","López"), new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().collect(Collectors.toList()));
+    }
+
     void testFindUserIdByAnyProperFraction() {
     }
 
     void testFindUserNameByAnyImproperFraction() {
-    }
-
-    @Test
-    void testFindFractionMultiplicationByUserFamilyName() {
-        assertEquals(new Fraction(-4, 15), new Searches().findFractionMultiplicationByUserFamilyName("Blanco"));
     }
 
     void testFindUserFamilyNameByAllSignFractionDistinct() {

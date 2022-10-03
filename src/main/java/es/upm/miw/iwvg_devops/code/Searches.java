@@ -28,14 +28,6 @@ public class Searches {
                 .map(User::getFamilyName);
     }
 
-    public Stream<String> findUserFamilyNameInitialByAnyProperFraction() {
-        return Stream.empty();
-    }
-
-    public Stream<String> findUserIdByAnyProperFraction() {
-        return Stream.empty();
-    }
-
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
         Fraction newFraction = new Fraction();
         new UsersDatabase().findAll()
@@ -51,6 +43,21 @@ public class Searches {
         return newFraction;
     }
 
+    public Stream<String> findUserFamilyNameByAllNegativeSignFractionDistinct() {
+        return new UsersDatabase().findAll()
+                .filter(user -> user.getFractions().stream()
+                        .anyMatch(fraction -> 0 > fraction.getDenominator() || 0 > fraction.getNumerator()))
+                .map(User::getFamilyName)
+                .distinct();
+    }
+
+    public Stream<String> findUserFamilyNameInitialByAnyProperFraction() {
+        return Stream.empty();
+    }
+
+    public Stream<String> findUserIdByAnyProperFraction() {
+        return Stream.empty();
+    }
 
     public Fraction findFirstFractionDivisionByUserId(String id) {
         return null;
