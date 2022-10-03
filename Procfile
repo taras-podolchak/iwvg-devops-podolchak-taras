@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/iwvg-devops-podolchak-taras-3.1.0-RELEASE.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/iwvg-devops-podolchak-taras-3.2.0-SNAPSHOT.jar
