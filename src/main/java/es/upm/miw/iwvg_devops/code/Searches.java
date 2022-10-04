@@ -30,18 +30,12 @@ public class Searches {
     }
 
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
-        Fraction newFraction = new Fraction();
-        new UsersDatabase().findAll()
+        return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
                 .map(User::getFractions)
-                .findAny()
-                .get()
-                .forEach((Fraction fraction) -> {
-                    fraction = newFraction.multiply(fraction);
-                    newFraction.setNumerator(fraction.getNumerator());
-                    newFraction.setDenominator(fraction.getDenominator());
-                });
-        return newFraction;
+                .flatMap(Collection::stream)
+                .reduce(Fraction::multiply)
+                .orElseThrow();
     }
 
     public Stream<String> findUserFamilyNameByAllNegativeSignFractionDistinct() {

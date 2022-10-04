@@ -30,7 +30,7 @@ class SearchesTest {
 
     @Test
     void testFindFractionMultiplicationByUserFamilyName() {
-        assertEquals(new Fraction(-4, 15), new Searches().findFractionMultiplicationByUserFamilyName("Blanco"));
+        assertEquals(new Fraction(1, -20), new Searches().findFractionMultiplicationByUserFamilyName("López"));
     }
 
     @Test
