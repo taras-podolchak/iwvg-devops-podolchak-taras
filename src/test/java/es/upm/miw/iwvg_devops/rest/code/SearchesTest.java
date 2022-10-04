@@ -47,22 +47,4 @@ class SearchesTest {
     void testFindFractionSubtractionByUserName() {
         assertEquals(new Fraction(11, 30), new Searches().findFractionSubtractionByUserName("Ana"));
     }
-
-    void testFindUserIdByAnyProperFraction() {
-    }
-
-    void testFindUserNameByAnyImproperFraction() {
-    }
-
-    void testFindUserFamilyNameByAllSignFractionDistinct() {
-    }
-
-    void testFindDecimalFractionByUserName() {
-    }
-
-    void testFindDecimalFractionBySignFraction() {
-    }
-
-    void testFindFractionAdditionByUserId() {
-    }
 }
