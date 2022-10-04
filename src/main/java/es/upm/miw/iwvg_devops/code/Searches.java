@@ -1,5 +1,6 @@
 package es.upm.miw.iwvg_devops.code;
 
+import java.util.Collection;
 import java.util.stream.Stream;
 
 public class Searches {
@@ -37,18 +38,12 @@ public class Searches {
     }
 
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
-        Fraction newFraction = new Fraction();
-        new UsersDatabase().findAll()
+        return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
                 .map(User::getFractions)
-                .findAny()
-                .get()
-                .forEach((Fraction fraction) -> {
-                    fraction = newFraction.multiply(fraction);
-                    newFraction.setNumerator(fraction.getNumerator());
-                    newFraction.setDenominator(fraction.getDenominator());
-                });
-        return newFraction;
+                .flatMap(Collection::stream)
+                .reduce(Fraction::multiply)
+                .orElseThrow();
     }
 
 
@@ -92,7 +87,6 @@ public class Searches {
     public Stream<Double> findDecimalFractionByNegativeSignFraction() {
 
 
-
         return Stream.empty();
     }
 
@@ -106,8 +100,6 @@ public class Searches {
 
 
     public Fraction findFractionSubtractionByUserName(String name) {
-
-
 
 
         return null;
