@@ -104,6 +104,17 @@ public class Fraction {
         return new Fraction(num, den).reduce();
     }
 
+    public Fraction subtraction(Fraction f) {
+        int a = numerator;
+        int b = denominator;
+        int c = f.getNumerator();
+        int d = f.getDenominator();
+        int num = ((a * d) - (b * c));
+        int den = (b * d);
+
+        return new Fraction(num, den).reduce();
+    }
+
     private Fraction reduce() {
         int u = numerator;
         int v = denominator;

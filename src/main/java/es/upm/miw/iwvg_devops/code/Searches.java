@@ -1,5 +1,6 @@
 package es.upm.miw.iwvg_devops.code;
 
+import java.util.Collection;
 import java.util.stream.Stream;
 
 public class Searches {
@@ -58,6 +59,15 @@ public class Searches {
                 .map(Fraction::decimal);
     }
 
+    public Fraction findFractionSubtractionByUserName(String name) {
+        return new UsersDatabase().findAll()
+                .filter(user -> name.equals(user.getName()))
+                .map(User::getFractions)
+                .flatMap(Collection::stream)
+                .reduce(Fraction::subtraction)
+                .orElseThrow();
+    }
+
     public Stream<Double> findDecimalImproperFractionByUserName(String name) {
         return Stream.empty();
     }
@@ -109,12 +119,4 @@ public class Searches {
     public Fraction findFirstFractionSubtractionByUserName(String name) {
         return null;
     }
-
-
-    public Fraction findFractionSubtractionByUserName(String name) {
-
-
-        return null;
-    }
-
 }
