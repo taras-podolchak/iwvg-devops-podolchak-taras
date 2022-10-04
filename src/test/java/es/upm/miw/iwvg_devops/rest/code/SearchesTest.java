@@ -28,15 +28,30 @@ class SearchesTest {
         assertEquals(List.of("López", "Torres"), new Searches().findUserFamilyNameByFractionDenominator(2).collect(Collectors.toList()));
     }
 
+    @Test
+    void testFindFractionMultiplicationByUserFamilyName() {
+        assertEquals(new Fraction(1, -20), new Searches().findFractionMultiplicationByUserFamilyName("López"));
+    }
+
+    @Test
+    void testFindUserFamilyNameByAllNegativeSignFractionDistinct() {
+        assertEquals(List.of("Blanco", "López"), new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().collect(Collectors.toList()));
+    }
+
+    @Test
+    void testFindDecimalFractionByNegativeSignFraction() {
+        assertEquals(List.of(-0.2, -0.5, -0.0), new Searches().findDecimalFractionByNegativeSignFraction().collect(Collectors.toList()));
+    }
+
+    @Test
+    void testFindFractionSubtractionByUserName() {
+        assertEquals(new Fraction(11, 30), new Searches().findFractionSubtractionByUserName("Ana"));
+    }
+
     void testFindUserIdByAnyProperFraction() {
     }
 
     void testFindUserNameByAnyImproperFraction() {
-    }
-
-    @Test
-    void testFindFractionMultiplicationByUserFamilyName() {
-        assertEquals(new Fraction(1, -20), new Searches().findFractionMultiplicationByUserFamilyName("López"));
     }
 
     void testFindUserFamilyNameByAllSignFractionDistinct() {
@@ -50,9 +65,4 @@ class SearchesTest {
 
     void testFindFractionAdditionByUserId() {
     }
-
-    void testFindFractionSubtractionByUserName() {
-    }
-
-
 }
