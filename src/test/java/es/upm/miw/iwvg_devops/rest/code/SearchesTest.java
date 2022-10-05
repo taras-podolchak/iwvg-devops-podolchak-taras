@@ -29,6 +29,11 @@ class SearchesTest {
     }
 
     @Test
+    void testFindUserFamilyNameInitialBySomeProperFraction() {
+        assertEquals(List.of("O.", "A.","O.", "A."), new Searches().findUserFamilyNameInitialBySomeProperFraction().collect(Collectors.toList()));
+    }
+
+    @Test
     void testFindFractionMultiplicationByUserFamilyName() {
         assertEquals(new Fraction(1, -20), new Searches().findFractionMultiplicationByUserFamilyName("López"));
     }

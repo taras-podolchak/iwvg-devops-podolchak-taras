@@ -12,7 +12,6 @@ public class Searches {
                 .distinct();
     }
 
-    //.peek(x -> LogManager.getLogger(this.getClass()).info("before: " + x))
     public Stream<Integer> findFractionNumeratorByUserFamilyName(String userFamilyName) {
         return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
@@ -27,6 +26,14 @@ public class Searches {
                 .filter(user -> user.getFractions().stream()
                         .anyMatch(fraction -> fractionDenominator == fraction.getDenominator()))
                 .map(User::getFamilyName);
+    }
+
+    //.peek(x -> LogManager.getLogger(this.getClass()).info("before: " + x))
+    public Stream<String> findUserFamilyNameInitialBySomeProperFraction() {
+        return new UsersDatabase().findAll()
+                .filter(user -> user.getFractions().stream()
+                        .anyMatch((Fraction fraction) -> fraction.isProper(fraction)))
+                .map(User::initials);
     }
 
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
