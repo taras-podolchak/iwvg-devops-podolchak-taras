@@ -36,6 +36,12 @@ public class Searches {
                 .map(User::initials);
     }
 
+    public Stream<String> findUserIdBySomeProperFraction(){
+        return new UsersDatabase().findAll()
+                .filter(user -> user.getFractions().stream()
+                        .anyMatch((Fraction fraction) -> fraction.isProper(fraction)))
+                .map(User::getId);
+    }
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
         return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
