@@ -42,12 +42,22 @@ public class Searches {
                         .anyMatch((Fraction fraction) -> fraction.isProper(fraction)))
                 .map(User::getId);
     }
+
     public Fraction findFractionMultiplicationByUserFamilyName(String userFamilyName) {
         return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
                 .map(User::getFractions)
                 .flatMap(Collection::stream)
                 .reduce(Fraction::multiply)
+                .orElseThrow();
+    }
+
+    public Fraction findFractionDivisionByUserId(String id){
+        return new UsersDatabase().findAll()
+                .filter(user -> id.equals(user.getId()))
+                .map(User::getFractions)
+                .flatMap(Collection::stream)
+                .reduce(Fraction::divide)
                 .orElseThrow();
     }
 
