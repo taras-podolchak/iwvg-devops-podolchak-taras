@@ -50,6 +50,11 @@ class SearchesTest {
     }
 
     @Test
+    void testFindFirstDecimalFractionByUserName() {
+        assertEquals(2.0, new Searches().findFirstDecimalFractionByUserName("Ana"));
+    }
+
+    @Test
     void testFindUserFamilyNameByAllNegativeSignFractionDistinct() {
         assertEquals(List.of("Blanco", "López"), new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().collect(Collectors.toList()));
     }

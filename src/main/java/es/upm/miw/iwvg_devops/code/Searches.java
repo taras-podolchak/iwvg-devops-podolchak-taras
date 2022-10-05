@@ -36,7 +36,7 @@ public class Searches {
                 .map(User::initials);
     }
 
-    public Stream<String> findUserIdBySomeProperFraction(){
+    public Stream<String> findUserIdBySomeProperFraction() {
         return new UsersDatabase().findAll()
                 .filter(user -> user.getFractions().stream()
                         .anyMatch((Fraction fraction) -> fraction.isProper(fraction)))
@@ -52,13 +52,22 @@ public class Searches {
                 .orElseThrow();
     }
 
-    public Fraction findFractionDivisionByUserId(String id){
+    public Fraction findFractionDivisionByUserId(String id) {
         return new UsersDatabase().findAll()
                 .filter(user -> id.equals(user.getId()))
                 .map(User::getFractions)
                 .flatMap(Collection::stream)
                 .reduce(Fraction::divide)
                 .orElseThrow();
+    }
+
+    public Double findFirstDecimalFractionByUserName(String name) {
+        return new UsersDatabase().findAll()
+                .filter(user -> name.equals(user.getName()))
+                .flatMap(user -> user.getFractions().stream())
+                .findFirst()
+                .get()
+                .decimal();
     }
 
     public Stream<String> findUserFamilyNameByAllNegativeSignFractionDistinct() {
