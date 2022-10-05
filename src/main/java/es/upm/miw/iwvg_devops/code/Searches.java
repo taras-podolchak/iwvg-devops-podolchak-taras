@@ -66,7 +66,7 @@ public class Searches {
                 .filter(user -> name.equals(user.getName()))
                 .flatMap(user -> user.getFractions().stream())
                 .findFirst()
-                .get()
+                .orElseThrow()
                 .decimal();
     }
 
